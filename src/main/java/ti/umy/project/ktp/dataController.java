@@ -35,7 +35,7 @@ public class dataController {
         model.addAttribute("record", record);
         
         
-        return "database";
+        return "dummy";
     }
     
 }

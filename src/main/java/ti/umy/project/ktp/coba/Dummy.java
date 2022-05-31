@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
@@ -28,11 +30,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Dummy.findAll", query = "SELECT d FROM Dummy d"),
     @NamedQuery(name = "Dummy.findById", query = "SELECT d FROM Dummy d WHERE d.id = :id"),
-    @NamedQuery(name = "Dummy.findByTanggal", query = "SELECT d FROM Dummy d WHERE d.tanggal = :tanggal")})
+    @NamedQuery(name = "Dummy.findByTanggal", query = "SELECT d FROM Dummy d WHERE d.tanggal = :tanggal"),
+    @NamedQuery(name = "Dummy.findByNama", query = "SELECT d FROM Dummy d WHERE d.nama = :nama")})
 public class Dummy implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -42,6 +46,8 @@ public class Dummy implements Serializable {
     @Lob
     @Column(name = "gambar")
     private byte[] gambar;
+    @Column(name = "nama")
+    private String nama;
 
     public Dummy() {
     }
@@ -72,6 +78,14 @@ public class Dummy implements Serializable {
 
     public void setGambar(byte[] gambar) {
         this.gambar = gambar;
+    }
+
+    public String getNama() {
+        return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     @Override
